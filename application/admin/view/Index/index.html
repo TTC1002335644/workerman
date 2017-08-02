@@ -1,0 +1,34 @@
+{include file="../application/view/view/loadFile.html"/}
+		<meta charset="utf-8">
+		<title>用户后台首页</title>
+		<!-- 动态菜单JS -->
+		<script type="text/javascript" src="__JS__admin/menu.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			{include file="../application/view/view/header.html,../application/view/view/left_menu.html"/}
+			<div class="right-menu">
+				<div class="main-hd">
+					<div class="page-teb" style="height:887px;">
+						<div class="l-tab-links">
+							<!-- 这个菜单标签页 -->
+							<ul style="left:0;" id="tab_page">
+								<li class="l-select" id="home_page" data-id ="0">
+									<a href="#" style="padding:0 25px;">首页</a>
+									<span class="close"></span>
+								</li>
+							</ul>
+
+						</div>
+						<div class="content_page_0">
+							{include file="../public/static/content/home.html"/}
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="__JS__/message.js"></script>
+<script src="__JS__admin/admin.js"></script>

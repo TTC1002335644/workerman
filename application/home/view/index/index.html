@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">-->
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="__BOOTSTRAP__css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="__CSS__home_index_index.css"/>
+		<link rel="stylesheet" type="text/css" href="__BANNER__css/style.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="__JS__jquery-moblie/jquery.mobile-1.4.5.min.css"/>-->
+		<script src="__JS__jquery.min.js"></script>
+		<script src="__BOOTSTRAP__js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="__BANNER__js/jquery.event.drag-1.5.min.js"></script>
+		<script type="text/javascript" src="__BANNER__js/jquery.touchSlider.js"></script>
+	</head>
+	<body>
+		<div class="search">
+			<i class="search_dish"></i>
+			<input type="text" class="search_value" name="search" placeholder="搜索菜名" />
+			<button class="btn btn-default" id="search_btn">搜索</button>
+		</div>
+
+		<div class="main_visual">
+			<div class="flicking_con">
+				<!-- 轮播图内容的导航点 -->
+			</div>
+			<div class="main_image">
+				<ul>
+					<!-- 轮播图内容，js加载或者php添加元素 -->
+				</ul>
+				<a href="javascript:;" id="btn_prev"></a>
+				<a href="javascript:;" id="btn_next"></a>
+			</div>
+		</div>
+
+		<div class="service_menu">
+			<ul>
+				<li class="feature_dish"><span>特色菜品</span></li>
+				<li class="book_room"><span>包厢预订</span></li>
+				<li class="dish_classify"><span>菜品分类</span></li>
+				<li class="dish_flavor"><span>口味</span></li>
+			</ul>
+		</div>
+		<hr>
+
+		<div class="menu_type_list">
+			<div class="dish_type">粤菜</div>
+			<hr>
+			<ul class="fish_list">
+				<li>
+					<img src="__UPLOAD__fish/fish_1.jpg">
+					<span>油炒油麦菜</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_2.jpg">
+					<span>爆炒肉丸</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_3.jpg">
+					<span>时菜上汤</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_4.jpg">
+					<span>橄榄菜炒四季豆</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+			</ul>
+			<hr>
+
+
+			<div class="dish_type">川菜</div>
+			<hr>
+			<ul class="fish_list">
+				<li>
+					<img src="__UPLOAD__fish/fish_1.jpg">
+					<span>油炒油麦菜</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_2.jpg">
+					<span>爆炒肉丸</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_3.jpg">
+					<span>时菜上汤</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+				<li>
+					<img src="__UPLOAD__fish/fish_4.jpg">
+					<span>橄榄菜炒四季豆</span>
+					<p class="price"><del>￥40</del>￥20</p>
+				</li>
+			</ul>
+			<hr>
+		</div>
+
+		<div class="footer_menu">
+
+		</div>
+	</body>
+	<script>
+		var img_url = ['/banner_1.jpg','/banner_2.jpg','/banner_3.jpg','/banner_4.jpg','/banner_5.jpg'];
+		$(document).ready(function(){
+			console.log(img_url);
+			var img_str_1 = '<li><span class="img_3" style="background:url(__UPLOAD__banner';
+			var img_str_2 =') center top no-repeat"></span></li>'
+			$.each(img_url,function(k,v){
+				$('.main_image ul').append(img_str_1+v+img_str_2);
+			});
+
+			$dragBln = false;
+			
+			$(".main_image").touchSlider({
+				flexible : true,
+				speed : 200,
+				btn_prev : $("#btn_prev"),
+				btn_next : $("#btn_next"),
+				paging : $(".flicking_con a"),
+				counter : function (e){
+					$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+				}
+			});
+			
+			// $(".main_image").bind("mousedown", function() {
+			// 	$dragBln = false;
+			// });
+			
+			$(".main_image").bind("dragstart", function() {
+				$dragBln = true;
+			});
+			
+			$(".main_image a").click(function(){
+				if($dragBln) {
+					return false;
+				}
+			});
+			
+			timer = setInterval(function(){
+				$("#btn_next").click();
+			}, 5000);
+			
+			$(".main_visual").hover(function(){
+				clearInterval(timer);
+			},function(){
+				timer = setInterval(function(){
+					$("#btn_next").click();
+				},5000);
+			});
+			
+			$(".main_image").bind("touchstart",function(){
+				clearInterval(timer);
+			}).bind("touchend", function(){
+				timer = setInterval(function(){
+					$("#btn_next").click();
+				}, 5000);
+			});
+			
+		});
+
+	</script>
+</html>
